@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huya.search.restful.mysql.mapper.QueryDetailMapper">
+    <select id="getQueryDetailList" resultMap="QueryDetail">
+        SELECT * from queryDetail
+        <where>
+            <if test="timeUp != null">
+                AND queryTime &lt;= #{timeUp}
+            </if>
+            <if test="timeLow != null">
+                AND queryTime &gt;= #{timeLow}
+            </if>
+        </where>
+    </select>
+    <resultMap id="QueryDetail" type="com.huya.search.restful.mysql.QueryDetail">
+        <result property="id" column="id"/>
+        <result property="queryTime" column="queryTime"/>
+        <result property="sql" column="sql"/>
+        <result property="useTime" column="useTime"/>
+        <result property="resultLen" column="resultLen" />
+        <result property="exceptionMsg" column="exceptionMsg"/>
+        <result property="table" column="table"/>
+    </resultMap>
+
+    <insert id="insertQueryDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into queryDetail (queryTime, `sql`, useTime, resultLen, exceptionMsg, `table`)
+        values (#{queryTime}, #{sql}, #{useTime}, #{resultLen}, #{exceptionMsg}, #{table})
+    </insert>
+
+</mapper>

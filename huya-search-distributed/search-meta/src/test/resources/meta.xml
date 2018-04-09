@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huya.search.index.meta.monitor.mysql.mapper.MetaMapper">
+    <select id="getMetaDaoList" resultMap="MetaDao">
+        SELECT m.table, m.topic, m.kafkaBootstrapServers, m.indexDeserializer, m.accuracy, c.partitionName, c.columnInfo
+        FROM TableMeta m left join TableColumn c on m.table = c.table
+        WHERE m.valid = 1 and c.valid = 1
+    </select>
+
+    <select id="getMetaDao" resultMap="MetaDao">
+        SELECT m.table, m.topic, m.kafkaBootstrapServers, m.indexDeserializer, m.accuracy, c.partitionName, c.columnInfo
+        FROM TableMeta m left join TableColumn c on m.table = c.table
+        WHERE m.table = #{table} and m.valid = 1 and c.valid = 1
+    </select>
+
+    <resultMap id="MetaDao" type="com.huya.search.index.meta.monitor.mysql.MetaDao">
+        <result property="table" column="table"/>
+        <result property="topic" column="topic"/>
+        <result property="kafkaBootstrapServers" column="kafkaBootstrapServers"/>
+        <result property="indexDeserializer" column="indexDeserializer"/>
+        <result property="accuracy" column="accuracy"/>
+
+        <collection property="list" javaType="ArrayList" resultMap="ColumnInfo"
+                    ofType="com.huya.search.index.meta.monitor.mysql.ColumnInfo" />
+    </resultMap>
+    <resultMap id="ColumnInfo" type="com.huya.search.index.meta.monitor.mysql.ColumnInfo">
+        <result property="partitionName" column="partitionName"/>
+        <result property="columnInfo" column="columnInfo"/>
+    </resultMap>
+
+    <insert id="insertTableMeta" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO TableMeta (`table`, topic, kafkaBootstrapServers,  indexDeserializer, accuracy)
+        VALUES (#{table}, #{topic}, #{kafkaBootstrapServers}, #{indexDeserializer}, #{accuracy})
+    </insert>
+
+    <insert id="insertTableColumn" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO TableColumn (`table`, partitionName, columnInfo)
+        VALUES (#{table}, #{partitionName}, #{columnInfo})
+    </insert>
+
+    <update id="deleteTableMeta">
+        UPDATE TableMeta SET valid = 0 WHERE `table` = #{table}
+    </update>
+
+    <update id="deleteTableColumn">
+        UPDATE TableColumn SET valid = 0 WHERE `table` = #{table}
+    </update>
+
+</mapper>

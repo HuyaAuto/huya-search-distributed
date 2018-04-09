@@ -1,0 +1,138 @@
+{
+  "hour": {
+    "type": "long",
+    "sort": "true"
+  },
+  "minute": {
+    "sort": "false"
+  },
+  "reserve1": {
+    "sort": "false"
+  },
+  "reserve1": {
+    "sort": "false"
+  },
+  "reserve2": {
+    "sort": "false"
+  },
+  "reserve3": {
+    "sort": "false"
+  },
+  "reserve4": {
+    "sort": "false"
+  },
+  "reserve5": {
+    "sort": "false"
+  },
+  "reserve6": {
+    "sort": "false"
+  },
+  "reserve7": {
+    "sort": "false"
+  },
+  "reserve8": {
+    "sort": "false"
+  },
+  "ip": {
+    "sort": "false"
+  },
+  "country": {
+    "sort": "false"
+  },
+  "sp": {
+    "sort": "false"
+  },
+  "act": {
+    "sort": "false"
+  },
+  "time": {
+    "sort": "false"
+  },
+  "key": {
+    "sort": "false"
+  },
+  "uid": {
+    "sort": "false"
+  },
+  "imei": {
+    "sort": "false"
+  },
+  "mac": {
+    "sort": "false"
+  },
+  "app": {
+    "sort": "false"
+  },
+  "appKey": {
+    "sort": "false"
+  },
+  "ver": {
+    "sort": "false"
+  },
+  "sdkver": {
+    "sort": "false"
+  },
+  "sjp": {
+    "sort": "false"
+  },
+  "sjm": {
+    "sort": "false"
+  },
+  "sys": {
+    "sort": "false"
+  },
+  "mbos": {
+    "sort": "false"
+  },
+  "mbl": {
+    "sort": "false"
+  },
+  "from": {
+    "sort": "false"
+  },
+  "ntm": {
+    "sort": "false"
+  },
+  "net": {
+    "sort": "false"
+  },
+  "sr": {
+    "sort": "false"
+  },
+  "guid": {
+    "sort": "false"
+  },
+  "event": {
+    "sort": "false"
+  },
+  "sessionid": {
+    "sort": "false"
+  },
+  "idfv": {
+    "sort": "false"
+  },
+  "opid": {
+    "sort": "false"
+  },
+  "imc": {
+    "sort": "false"
+  },
+  "srvtm": {
+    "sort": "false"
+  },
+  "hdStime": {
+    "sort": "false"
+  },
+  "arid": {
+    "sort": "false"
+  },
+  "hdid": {
+    "sort": "false"
+  },
+  "ver": {
+    "sort": "false"
+  },
+  "ver": {
+    "sort": "false"
+  }
+}

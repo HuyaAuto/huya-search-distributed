@@ -1,0 +1,9 @@
+group 'com.huya.search'
+version '1.0-SNAPSHOT'
+apply plugin: 'eclipse'
+dependencies {
+    compile project(':search-common')
+    compile project(':search-partition')
+    compile project(':search-meta')
+    compile project(':search-data')
+}

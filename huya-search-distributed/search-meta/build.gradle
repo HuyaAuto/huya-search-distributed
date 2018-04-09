@@ -1,0 +1,8 @@
+group 'com.huya.search'
+version '1.0-SNAPSHOT'
+apply plugin: 'eclipse'
+dependencies {
+    compile 'org.apache.solr:solr-core:6.6.0'
+    compile project(':search-common')
+    compile project(':search-partition')
+}

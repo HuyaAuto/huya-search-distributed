@@ -1,0 +1,15 @@
+group 'com.huya.search'
+version '1.0-SNAPSHOT'
+apply plugin: 'eclipse'
+
+dependencies {
+    compile 'org.apache.kafka:kafka-clients:0.11.0.1'
+    compile 'com.yy.dc.log:logsvr-avro-event-dese:1.8.0-SNAPSHOT'
+    compile 'org.codehaus.groovy:groovy-all:2.4.14'
+    compile 'com.huya.beelogsvr:protocol:0.1.2-SNAPSHOT'
+    compile 'com.duowan.datawarehouse:datawarehouse-common-dto:1.2.6'
+    testCompile 'com.alibaba:fastjson:1.2.47'
+    compile project(':search-common')
+    compile project(':search-data')
+    compile project(':search-engine2')
+}

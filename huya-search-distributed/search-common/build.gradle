@@ -1,0 +1,35 @@
+group 'com.huya.search'
+version '1.0-SNAPSHOT'
+apply plugin: 'eclipse'
+
+dependencies {
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.apache.commons:commons-vfs2:2.1'
+    compile 'com.google.guava:guava:19.0'
+    compile 'com.google.inject:guice:4.1.0'
+    compile 'commons-cli:commons-cli:1.3.1'
+    compile 'joda-time:joda-time:2.9.9'
+    compile 'org.yaml:snakeyaml:1.18'
+    compile 'org.slf4j:slf4j-log4j12:1.7.7'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.1'
+    compile ('io.dropwizard.metrics:metrics-core:3.2.2') {
+        exclude group: 'log4j'
+        exclude group: 'org.slf4j'
+        exclude group: 'slf4j-api'
+    }
+    compile 'org.quartz-scheduler:quartz:2.2.1'
+    compile 'org.quartz-scheduler:quartz-jobs:2.2.1'
+
+    compile 'mysql:mysql-connector-java:5.1.40'
+    compile 'org.mybatis:mybatis:3.4.5'
+
+    compile 'com.yy.dc.svr_bus:sdk:0.0.2-SNAPSHOT'
+
+    compile 'com.github.ssedano:jump-consistent-hash:1.0.0'
+
+    compile 'com.esotericsoftware:kryo:4.0.1'
+
+    compile 'com.yy.dc.saas:message-api:0.0.2-SNAPSHOT'
+
+}

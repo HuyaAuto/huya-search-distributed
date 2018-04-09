@@ -1,0 +1,11 @@
+group 'com.huya.search'
+version '1.0-SNAPSHOT'
+apply plugin: 'eclipse'
+dependencies {
+    compile 'org.antlr:antlr4-runtime:4.7'
+    compile project(':search-common')
+    compile project(':search-data')
+    compile project(':search-meta')
+    compile project(':search-partition')
+    compile project(':search-lucene2')
+}

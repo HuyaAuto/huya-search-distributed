@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="cacheEnabled" value="true" />
+        <setting name="lazyLoadingEnabled" value="true" />
+        <setting name="multipleResultSetsEnabled" value="true" />
+        <setting name="useColumnLabel" value="true" />
+        <setting name="useGeneratedKeys" value="false" />
+        <setting name="autoMappingBehavior" value="PARTIAL" />
+        <setting name="defaultExecutorType" value="SIMPLE" />
+        <setting name="defaultStatementTimeout" value="25" />
+        <setting name="safeRowBoundsEnabled" value="false" />
+        <setting name="safeResultHandlerEnabled" value="false"/>
+        <setting name="mapUnderscoreToCamelCase" value="false" />
+        <setting name="localCacheScope" value="SESSION" />
+        <setting name="jdbcTypeForNull" value="OTHER" />
+        <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
+    </settings>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://300c6c.slave.mysql.yygamedev.com:6733/huya-search-test?allowMultiQueries=true&amp;autoReconnect=true" />
+                <property name="username" value="5d93599b24b4" />
+                <property name="password" value="9e24309e51092ea3" />
+                <!-- http://mybatis.github.io/mybatis-3/configuration.html -->
+                <property name="poolMaximumActiveConnections" value="100" />
+                <property name="poolMaximumIdleConnections" value="5" />
+                <property name="poolMaximumCheckoutTime" value="20000" />
+                <property name="poolPingEnabled" value="true" />
+                <property name="poolPingQuery" value="select 1 from dual;" />
+                <!-- This configures how often the poolPingQuery will be used -->
+                <property name="poolPingConnectionsNotUsedFor" value="30" />
+            </dataSource>
+        </environment>
+
+    </environments>
+
+    <mappers>
+        <mapper resource="meta.xml"/>
+        <mapper resource="query.xml"/>
+        <mapper resource="log.xml"/>
+        <mapper resource="task.xml"/>
+    </mappers>
+
+</configuration>

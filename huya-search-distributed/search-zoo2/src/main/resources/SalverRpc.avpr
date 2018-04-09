@@ -1,0 +1,133 @@
+{
+    "namespace": "com.huya.search.rpc",
+    "protocol": "SalverRpcProtocol",
+    "types": [{
+            "type": "record",
+            "name": "RpcResultRow",
+            "fields": [{
+                "name": "resultRow",
+                "type": {
+                    "type": "map",
+                    "values": "string"
+                }
+            }]
+        },
+        {
+            "type": "record",
+            "name": "RpcResult",
+            "fields": [{
+                "name": "result",
+                "type": {
+                    "type": "array",
+                    "items": "RpcResultRow"
+                }
+            }]
+        },
+        {
+            "type": "record",
+            "name": "RpcRefreshContext",
+            "fields": [{
+                    "name": "table",
+                    "type": "string"
+                },
+                {
+                    "name": "unixTime",
+                    "type": "long"
+                }
+            ]
+        }
+    ],
+    "messages": {
+        "refresh": {
+            "request": [{
+                "name": "refreshContext",
+                "type": "RpcRefreshContext"
+            }],
+            "response": "null"
+        },
+        "sql": {
+            "request": [{
+                    "name": "queryBytes",
+                    "type": "bytes"
+                },
+                {
+                    "name": "shardArray",
+                    "type": {
+                        "type": "array",
+                        "items": "int"
+                    }
+                },
+                {
+                    "name": "shardNum",
+                    "type": "int"
+                }
+            ],
+            "response": "RpcResult"
+        },
+        "syncPullTask": {
+            "request":[],
+            "response": "string"
+        },
+        "openPullTask": {
+            "request":[{
+                "name": "serviceUrl",
+                "type": "string"
+            },
+            {
+                "name": "table",
+                "type": "string"
+            },
+            {
+                "name": "shardId",
+                "type": "int"
+            },
+            {
+                "name": "method",
+                "type": "string"
+            }
+        ],
+            "response": "null"
+        },
+        "closePullTask": {
+            "request": [{
+                "name": "serviceUrl",
+                "type": "string"
+            },
+            {
+                "name": "table",
+                "type": "string"
+            },
+            {
+                "name": "shardId",
+                "type": "int"
+            }],
+            "response": "null"
+        },
+        "closePullTaskList": {
+            "request": [{
+                "name": "serviceUrl",
+                "type": "string"
+            },
+            {
+                "name": "table",
+                "type": "string"
+            },
+            {
+                "name": "shardIds",
+                "type": {
+                    "type": "array",
+                    "items": "int"
+                }
+            }],
+            "response": "null"
+        },
+        "insertStat": {
+            "request":[],
+            "response": "string"
+        },
+        "shutdown": {
+            "request":[],
+            "response": "null"
+        }
+    }
+}

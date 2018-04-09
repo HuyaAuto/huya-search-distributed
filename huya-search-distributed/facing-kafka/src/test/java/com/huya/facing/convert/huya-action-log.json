@@ -1,0 +1,51 @@
+{
+  "action": {
+    "sort": "true"
+  },
+  "duration": {
+    "type": "long"
+  },
+  "atime": {
+    "sort": "true"
+  },
+  "flag": {},
+  "mid": {},
+  "ip": {
+    "sort": "true"
+  },
+  "proxyIp": {},
+  "stime": {
+    "sort": "true"
+  },
+  "passport": {
+    "sort": "true"
+  },
+  "game": {
+    "sort": "true"
+  },
+  "gameServer": {},
+  "runSource": {},
+  "iver": {},
+  "uver": {},
+  "channel": {},
+  "referrer": {},
+  "pid": {},
+  "os": {},
+  "browerVersion": {},
+  "screenResolution": {},
+  "screenColor": {},
+  "localLanguage": {},
+  "java": {},
+  "cookies": {},
+  "netVersion": {},
+  "country": {},
+  "province": {},
+  "city": {},
+  "isp": {},
+  "level1": {},
+  "level2": {},
+  "level3": {},
+  "level4": {},
+  "level5": {},
+  "ext": {}
+}

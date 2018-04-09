@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huya.search.restful.mysql.mapper.LogContextMapper">
+    <select id="getLogContextList" resultMap="LogContext">
+        SELECT * from LogContext
+    </select>
+    <resultMap id="LogContext" type="com.huya.search.restful.mysql.LogContext">
+        <result property="id" column="id"/>
+        <result property="table" column="table"/>
+        <result property="columnKeys" column="columnKeys"/>
+        <result property="context" column="context"/>
+    </resultMap>
+
+    <insert id="insertLogContext" useGeneratedKeys="true" keyProperty="id">
+        insert into LogContext (`table`, columnKeys, context)
+        values (#{table}, #{columnKeys}, #{context})
+    </insert>
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huya.search.node.mysql.mapper.TaskInfoMapper">
+    <select id="getTaskInfo" resultMap="TaskInfo">
+      SELECT `table`, shardId, serverUrl
+      FROM TaskInfo
+      WHERE `table` = #{table} and shardId = #{shardId}
+    </select>
+
+    <select id="getAllTaskInfo" resultMap="TaskInfo">
+        SELECT `table`, shardId, serverUrl
+        FROM TaskInfo
+    </select>
+
+    <resultMap id="TaskInfo" type="com.huya.search.node.mysql.TaskInfo">
+        <result property="table" column="table"/>
+        <result property="shardId" column="shardId"/>
+        <result property="serverUrl" column="serverUrl"/>
+    </resultMap>
+
+    <insert id="insertTaskInfo">
+        INSERT INTO TaskInfo (`table`, shardId, serverUrl)
+        VALUES (#{table}, #{shardId}, #{serverUrl})
+    </insert>
+
+</mapper>

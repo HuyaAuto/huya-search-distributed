@@ -1,0 +1,134 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+group 'com.huya.search'
+version '1.0-SNAPSHOT'
+description '基于 Lucene 的分布式索引服务'
+apply plugin: 'eclipse'
+
+allprojects {
+
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        maven { url "http://devserv.game.yy.com/nexus/content/repositories/releases/"}
+        maven { url "http://devserv.game.yy.com/nexus/content/repositories/snapshots/"}
+        maven { url "http://devserv.game.yy.com:52605/nexus/content/groups/public/"}
+        maven { url "http://devserv.game.yy.com:52605/nexus/content/groups/public-snapshots/"}
+        mavenCentral()
+    }
+
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+}
+
+
+
+dependencies {
+    compile project(':search-memory')
+    compile project(':facing-kafka')
+    compile project(':search-misc')
+    compile project(':search-localImport')
+    compile project(':search-rest')
+    compile project(':search-zoo2')
+    compile 'commons-cli:commons-cli:1.4'
+    testCompile project(':search-test')
+    testCompile 'com.squareup.okhttp3:okhttp:3.2.0'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.huya.search.HuyaSearchSalver'
+    }
+}
+
+task clearWorkspace(type:Delete){
+    group = 'buildPor'
+    description = '清理 workspace 目录'
+    delete 'workspace/bin', 'workspace/conf', 'workspace/lib', 'workspace/log'
+}
+
+task copyToLib(type: Copy) {
+    group = 'buildPor'
+    description = '拷贝依赖 Jar 到 lib 目录'
+    into "workspace/lib"
+    from configurations.runtime
+}
+
+task taskCurrentJar(type:Jar, dependsOn: compileJava) {
+    group = 'buildPor'
+    description = '编译当前工程打包成 jar'
+    manifest {
+        attributes 'Main-Class': 'com.huya.search.HuyaSearchSalver'
+    }
+    from 'build/classes/main'
+    destinationDir = file('workspace/lib')
+}
+
+task copyToConfig(type: Copy) {
+    group = 'buildPor'
+    description = '拷贝配置文件到 conf 目录'
+    into "workspace/conf"
+    from "temp/conf"
+}
+
+task copyToBin(type: Copy) {
+    group = 'buildPor'
+    description = '拷贝脚本到 bin 目录'
+    into "workspace/bin"
+    from "shell"
+}
+
+task shellPermission(dependsOn:  [copyToBin]) {
+    group = 'buildPor'
+    description = '设置脚本运行权限'
+    doLast {
+        FileTree tree = fileTree(dir: 'workspace/bin')
+        tree.each {
+            File file ->
+                if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
+                    println "chmod 700 ${file.absolutePath}"
+                    def proc = "chmod 700 ${file.absolutePath}".execute()
+                    proc.waitFor()
+                }
+        }
+    }
+}
+
+task makeLogDir() {
+    group = 'buildPor'
+    description = '创建日志目录'
+    doLast {
+        file("$projectDir/workspace/log").mkdir()
+    }
+}
+
+task buildWorkspace(dependsOn: [copyToLib, taskCurrentJar, copyToConfig, shellPermission, makeLogDir]) {
+    group = 'buildPor'
+    description = '拷贝与创建'
+}
+
+task buildTar(type: Tar) {
+    group = 'buildPor'
+    description = '创建生产环境压缩包'
+    archiveName = 'huya-search.tar'
+    from "workspace"
+    destinationDir  file('tar')
+    extension 'tar'
+    compression = Compression.GZIP
+}
+
+clearWorkspace.finalizedBy buildWorkspace
+buildWorkspace.finalizedBy buildTar
+
+task buildPro(dependsOn: clearWorkspace) {
+    group = 'buildPor'
+    description = '生成生产环境'
+
+    doLast {
+        println 'build success'
+    }
+
+}
